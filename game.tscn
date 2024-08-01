@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://g6e81pujlknt"]
+
+[ext_resource type="Script" path="res://script/game.gd" id="1_7pqsl"]
+[ext_resource type="PackedScene" uid="uid://77gkjjacy5da" path="res://asset/huki.glb" id="1_h2a7x"]
+[ext_resource type="PackedScene" uid="uid://bxr48hu232uq1" path="res://asset/terrain.dae" id="2_7il6g"]
+[ext_resource type="Script" path="res://script/huki.gd" id="2_gc2bu"]
+[ext_resource type="PackedScene" uid="uid://cjt31ru5lmrv8" path="res://asset/pohatu.glb" id="3_h702r"]
+[ext_resource type="Material" uid="uid://b25gmyusb07op" path="res://asset/new_procedural_sky_material.tres" id="4_cv7o6"]
+[ext_resource type="PackedScene" uid="uid://bxvatvk5ouf6x" path="res://asset/comet.glb" id="5_vdi1i"]
+[ext_resource type="Script" path="res://script/comet.gd" id="8_6s3f5"]
+
+[sub_resource type="Sky" id="Sky_8ejwq"]
+sky_material = ExtResource("4_cv7o6")
+
+[sub_resource type="Environment" id="Environment_bn0f1"]
+background_mode = 2
+sky = SubResource("Sky_8ejwq")
+sky_custom_fov = 91.2
+ambient_light_source = 3
+ambient_light_color = Color(0.950071, 0.819878, 0.664379, 1)
+ambient_light_energy = 1.19
+
+[node name="Game" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0672849, 0)
+script = ExtResource("1_7pqsl")
+
+[node name="huki" parent="." instance=ExtResource("1_h2a7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000138134, 0.00293259, 0.385287)
+script = ExtResource("2_gc2bu")
+
+[node name="Camera3D" type="Camera3D" parent="huki"]
+process_mode = 3
+transform = Transform3D(-1, 6.70699e-09, 8.71651e-08, 1.34634e-08, 0.996973, 0.0777457, -8.63798e-08, 0.0777457, -0.996973, 0.000138134, 0.0564676, 0.00564896)
+environment = SubResource("Environment_bn0f1")
+fov = 45.8
+near = 0.004
+
+[node name="terrain" parent="." instance=ExtResource("2_7il6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019, 0, -0.011)
+
+[node name="pohatu" parent="." instance=ExtResource("3_h702r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0099476, 0, -0.272284)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.205995, 0.646163, -0.734874, -0.222183, 0.700482, 0.678203, 0.952996, 0.302983, -0.000729971, -1.87338, 1.27645, 0.230933)
+
+[node name="comet" parent="." instance=ExtResource("5_vdi1i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00573805, 0.0176752, 0.44189)
+script = ExtResource("8_6s3f5")
